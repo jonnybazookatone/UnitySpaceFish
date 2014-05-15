@@ -14,17 +14,28 @@ public class PlayerMove : MonoBehaviour {
 	// Variables start___________________
 	private float velocityPlayer;
 	private float inVelocity;
+	private float forceJump;
+	private float forceJumpInt;
 	// Variables end_____________________
 
 	// Use this for initialization
 	void Start () 
 	{
-		velocityPlayer = .5f;
+		velocityPlayer = .2f;
+		forceJumpInt = 4;
+		forceJump = 0.00001f * forceJumpInt;
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate ()
 	{
+		// Physics should be placed within the FixedUpdate function which is in-sync with
+		// that of the physics engine updates. The update function is in-sync with the graphics
+		// rendering, and so this can result in strange effects.
+		//
+		// see; http://answers.unity3d.com/questions/10993/whats-the-difference-between-update-and-fixedupdat.html
+		//
+
 		// On left or right button, move left or right
 		inVelocity = Input.GetAxis("Horizontal") * velocityPlayer;
 
@@ -40,10 +51,7 @@ public class PlayerMove : MonoBehaviour {
 		{
 			GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 			Rigidbody playerRigidBody = playerObject.GetComponent<Rigidbody>();
-			playerRigidBody.AddForce(0, 0.1f, 0);
+			playerRigidBody.AddForce(0, forceJump, 0);
 		}
-
-
-
 	}
 }
