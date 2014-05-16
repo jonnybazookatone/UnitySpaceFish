@@ -29,6 +29,10 @@ public class PlayerMove : MonoBehaviour {
 	private Vector3 mouseScreenPosition;
 	private Vector3 mouseWorldPosition;
 	public GameObject playerBox;
+
+	// Box variables
+	private float boxWidth;
+	private float boxHeight;
 	// Variables end_____________________
 
 	// Use this for initialization
@@ -41,6 +45,13 @@ public class PlayerMove : MonoBehaviour {
 		jumpRate = 1;
 		nextBoxTime = 0;
 		nextJumpTime = 0;
+
+		// Get the dimensions of the boxes directly
+		Mesh playerMesh = playerBox.GetComponent<MeshFilter>().sharedMesh;
+		float pixelRatio = (Camera.main.orthographicSize) / Camera.main.pixelHeight;
+		Debug.Log(pixelRatio);
+		boxWidth = playerMesh.bounds.size.x / pixelRatio;
+		boxHeight = playerMesh.bounds.size.y / pixelRatio;
 	}
 	
 	// Update is called once per frame
@@ -76,12 +87,16 @@ public class PlayerMove : MonoBehaviour {
 
 	void Update ()
 	{
+		// This is to allow it to follow the mouse on the screen
+		mouseScreenPosition = Input.mousePosition;
+
 		// If the mouse button is pressed then act upon box creation
 		if (Input.GetButton("Fire1") && Time.time > nextBoxTime)
 		{
+
+
 			nextBoxTime = Time.time + boxCreateRate;
 
-			mouseScreenPosition = Input.mousePosition;
 			mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 			mouseWorldPosition.z = 0;
 			Debug.Log(mouseWorldPosition);
@@ -89,5 +104,11 @@ public class PlayerMove : MonoBehaviour {
 			//playerBox = GameObject.FindGameObjectWithTag("FishyBox");
 			Instantiate(playerBox, mouseWorldPosition, Quaternion.identity);
 		}
+	}
+
+	void OnGUI ()
+	{
+		GUI.Box(new Rect((mouseScreenPosition.x-boxWidth/2.0f),(Screen.height-mouseScreenPosition.y-boxHeight/2.0f),
+		                 boxHeight, boxWidth), "");
 	}
 }

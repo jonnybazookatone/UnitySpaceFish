@@ -3,6 +3,9 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - FishyBox
+  - 
+  - FishBox
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

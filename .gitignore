@@ -2,6 +2,8 @@
 # User Generated Binaries #
 # ======================= #
 *.png
+*.tif
+*.tiff
 
 # =============== #
 # Unity generated #
