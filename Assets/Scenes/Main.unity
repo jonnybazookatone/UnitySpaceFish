@@ -101,7 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27db151288d203409e0310a404c0a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBox: {fileID: 100000, guid: a39e9825813e8b040a75335e5a43c3ae, type: 2}
+  playerBoxRed: {fileID: 100000, guid: a39e9825813e8b040a75335e5a43c3ae, type: 2}
+  playerBoxGreen: {fileID: 100000, guid: ed7764f188ddfb14a8706a723d0b1717, type: 2}
+  playerBoxBlue: {fileID: 100000, guid: c57d1d1c9a7a8854ab6372dd6b44f33b, type: 2}
 --- !u!4 &459313949
 Transform:
   m_ObjectHideFlags: 0
@@ -109,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 459313947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.985969305, y: 2.99875069, z: -7.21832848}
+  m_LocalPosition: {x: 0, y: 4.88638687, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -431,4 +433,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812ec0455fad02a4b81eba513cf76322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBox: {fileID: 100000, guid: a39e9825813e8b040a75335e5a43c3ae, type: 2}
+  playerBoxRed: {fileID: 100000, guid: a39e9825813e8b040a75335e5a43c3ae, type: 2}
+  playerBoxBlue: {fileID: 100000, guid: c57d1d1c9a7a8854ab6372dd6b44f33b, type: 2}
+  playerBoxGreen: {fileID: 100000, guid: ed7764f188ddfb14a8706a723d0b1717, type: 2}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// This script will control the player's movements.
@@ -26,20 +27,27 @@ public class PlayerMove : MonoBehaviour {
 	private float boxCreateRate;
 	private float nextJumpTime;
 	private float jumpRate;
+	private int playerBoxChoice;
 	private Vector3 mouseScreenPosition;
 	private Vector3 mouseWorldPosition;
-	public GameObject playerBox;
+	public GameObject playerBoxRed;
+	public GameObject playerBoxBlue;
+	public GameObject playerBoxGreen;
+	private Texture currentTexture;
 
 	// Box variables
 	private float boxWidth;
 	private float boxHeight;
+	List<GameObject> boxObjectList = new List<GameObject>();
+
+
 	// Variables end_____________________
 
 	// Use this for initialization
 	void Start () 
 	{
 		velocityPlayer = .2f;
-		forceJumpInt = 4;
+		forceJumpInt = 5;
 		forceJump = 0.00001f * forceJumpInt;
 		boxCreateRate = 1;
 		jumpRate = 1;
@@ -47,11 +55,20 @@ public class PlayerMove : MonoBehaviour {
 		nextJumpTime = 0;
 
 		// Get the dimensions of the boxes directly
-		Mesh playerMesh = playerBox.GetComponent<MeshFilter>().sharedMesh;
+		Mesh playerMesh = playerBoxRed.GetComponent<MeshFilter>().sharedMesh;
 		float pixelRatio = (Camera.main.orthographicSize) / Camera.main.pixelHeight;
-		Debug.Log(pixelRatio);
+		//Debug.Log(pixelRatio);
 		boxWidth = playerMesh.bounds.size.x / pixelRatio;
 		boxHeight = playerMesh.bounds.size.y / pixelRatio;
+
+		// Create the list to be used for box selection
+		boxObjectList.Add (playerBoxRed);
+		boxObjectList.Add (playerBoxGreen);
+		boxObjectList.Add (playerBoxBlue);
+
+		// Default start choice: red box
+		playerBoxChoice = 0;
+		currentTexture = boxObjectList[playerBoxChoice].renderer.sharedMaterial.mainTexture;
 	}
 	
 	// Update is called once per frame
@@ -75,13 +92,31 @@ public class PlayerMove : MonoBehaviour {
 		transform.position = playerPosition;
 
 		// Check if the jump key is pressed. Currently set to space bar.
-		if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextJumpTime)
+		if (Input.GetButton ("Jump") && Time.time > nextJumpTime)
 		{
 			nextJumpTime = Time.time + jumpRate;
 
 			GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 			Rigidbody playerRigidBody = playerObject.GetComponent<Rigidbody>();
 			playerRigidBody.AddForce(0, forceJump, 0);
+		}
+
+		// User can change the box that they are using
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			playerBoxChoice = 0;
+			currentTexture = boxObjectList[playerBoxChoice].renderer.material.mainTexture;
+
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			playerBoxChoice = 1;
+			currentTexture = boxObjectList[playerBoxChoice].renderer.material.mainTexture;
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			playerBoxChoice = 2;
+			currentTexture = boxObjectList[playerBoxChoice].renderer.material.mainTexture;
 		}
 	}
 
@@ -93,16 +128,14 @@ public class PlayerMove : MonoBehaviour {
 		// If the mouse button is pressed then act upon box creation
 		if (Input.GetButton("Fire1") && Time.time > nextBoxTime)
 		{
-
-
 			nextBoxTime = Time.time + boxCreateRate;
 
 			mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 			mouseWorldPosition.z = 0;
-			Debug.Log(mouseWorldPosition);
+			//Debug.Log(mouseWorldPosition);
 
 			//playerBox = GameObject.FindGameObjectWithTag("FishyBox");
-			Instantiate(playerBox, mouseWorldPosition, Quaternion.identity);
+			Instantiate(boxObjectList[playerBoxChoice], mouseWorldPosition, Quaternion.identity);
 		}
 	}
 
@@ -110,5 +143,10 @@ public class PlayerMove : MonoBehaviour {
 	{
 		GUI.Box(new Rect((mouseScreenPosition.x-boxWidth/2.0f),(Screen.height-mouseScreenPosition.y-boxHeight/2.0f),
 		                 boxHeight, boxWidth), "");
+
+		GUI.Box(new Rect(10, 10, boxHeight*2, boxWidth*2), "Player");
+
+		GUI.DrawTexture(new Rect(10, 10, 10, 10), currentTexture);
+
 	}
 }

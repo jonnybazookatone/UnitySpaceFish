@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - FishyBox
+  - FishyBoxRed
+  - FishyBoxBlue
+  - FishyBoxGreen
   - 
   - FishBox
   - 

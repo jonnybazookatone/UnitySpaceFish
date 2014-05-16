@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RedFishBox
+  m_Name: BlueMaterial
   m_Shader: {fileID: 9, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -17,7 +17,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 52ae03873dd9f55469f257a1dc657381, type: 3}
+          m_Texture: {fileID: 2800000, guid: 1a1d25bb808a64b4c8f2320ac8e0d539, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -38,7 +38,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .0853706449
+        second: .078125
       data:
         first:
           name: _Parallax
@@ -47,8 +47,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .838235259, g: .899594307, b: 1, a: 1}
+        second: {r: .382785469, g: .592948318, b: .882352948, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: 1, g: .632352948, b: .632352948, a: 1}
+        second: {r: .368863881, g: .0661764741, b: 1, a: 1}
