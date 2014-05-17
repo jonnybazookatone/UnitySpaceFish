@@ -436,3 +436,6 @@ MonoBehaviour:
   playerBoxRed: {fileID: 100000, guid: a39e9825813e8b040a75335e5a43c3ae, type: 2}
   playerBoxBlue: {fileID: 100000, guid: c57d1d1c9a7a8854ab6372dd6b44f33b, type: 2}
   playerBoxGreen: {fileID: 100000, guid: ed7764f188ddfb14a8706a723d0b1717, type: 2}
+  RedTexture: {fileID: 2800000, guid: 52ae03873dd9f55469f257a1dc657381, type: 3}
+  BlueTexture: {fileID: 2800000, guid: 1a1d25bb808a64b4c8f2320ac8e0d539, type: 3}
+  GreenTexture: {fileID: 2800000, guid: 27485a68e4754fa4381ebe9d086003e4, type: 3}

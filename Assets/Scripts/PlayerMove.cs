@@ -34,20 +34,25 @@ public class PlayerMove : MonoBehaviour {
 	public GameObject playerBoxBlue;
 	public GameObject playerBoxGreen;
 	private Texture currentTexture;
+	public Texture RedTexture;
+	public Texture BlueTexture;
+	public Texture GreenTexture;
 
 	// Box variables
 	private float boxWidth;
 	private float boxHeight;
+	private float pixelRatio;
+	private int numberOfColours;
 	List<GameObject> boxObjectList = new List<GameObject>();
-
-
+	List<Texture> boxTextureList = new List<Texture>();
+	
 	// Variables end_____________________
 
 	// Use this for initialization
 	void Start () 
 	{
 		velocityPlayer = .2f;
-		forceJumpInt = 5;
+		forceJumpInt = 7;
 		forceJump = 0.00001f * forceJumpInt;
 		boxCreateRate = 1;
 		jumpRate = 1;
@@ -55,20 +60,24 @@ public class PlayerMove : MonoBehaviour {
 		nextJumpTime = 0;
 
 		// Get the dimensions of the boxes directly
-		Mesh playerMesh = playerBoxRed.GetComponent<MeshFilter>().sharedMesh;
-		float pixelRatio = (Camera.main.orthographicSize) / Camera.main.pixelHeight;
-		//Debug.Log(pixelRatio);
-		boxWidth = playerMesh.bounds.size.x / pixelRatio;
-		boxHeight = playerMesh.bounds.size.y / pixelRatio;
+		pixelRatio = (Camera.main.orthographicSize) / Camera.main.pixelHeight * 2;
 
 		// Create the list to be used for box selection
 		boxObjectList.Add (playerBoxRed);
 		boxObjectList.Add (playerBoxGreen);
 		boxObjectList.Add (playerBoxBlue);
 
+		boxTextureList.Add (RedTexture);
+		boxTextureList.Add (GreenTexture);
+		boxTextureList.Add (BlueTexture);
+
 		// Default start choice: red box
-		playerBoxChoice = 0;
-		currentTexture = boxObjectList[playerBoxChoice].renderer.sharedMaterial.mainTexture;
+		numberOfColours = 3;
+		playerBoxChoice = Random.Range(0, numberOfColours-1);
+		currentTexture = boxTextureList[playerBoxChoice];
+
+		boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
+		boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
 	}
 	
 	// Update is called once per frame
@@ -100,24 +109,6 @@ public class PlayerMove : MonoBehaviour {
 			Rigidbody playerRigidBody = playerObject.GetComponent<Rigidbody>();
 			playerRigidBody.AddForce(0, forceJump, 0);
 		}
-
-		// User can change the box that they are using
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			playerBoxChoice = 0;
-			currentTexture = boxObjectList[playerBoxChoice].renderer.material.mainTexture;
-
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			playerBoxChoice = 1;
-			currentTexture = boxObjectList[playerBoxChoice].renderer.material.mainTexture;
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			playerBoxChoice = 2;
-			currentTexture = boxObjectList[playerBoxChoice].renderer.material.mainTexture;
-		}
 	}
 
 	void Update ()
@@ -132,21 +123,52 @@ public class PlayerMove : MonoBehaviour {
 
 			mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 			mouseWorldPosition.z = 0;
-			//Debug.Log(mouseWorldPosition);
 
-			//playerBox = GameObject.FindGameObjectWithTag("FishyBox");
 			Instantiate(boxObjectList[playerBoxChoice], mouseWorldPosition, Quaternion.identity);
+		}
+
+		// User can change the box that they are using
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			playerBoxChoice = 0;
+			currentTexture = boxTextureList[playerBoxChoice];
+			
+			// Get the dimensions of the boxes directly
+			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
+			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			playerBoxChoice = 1;
+			currentTexture = boxTextureList[playerBoxChoice];
+			
+			// Get the dimensions of the boxes directly
+			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
+			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			playerBoxChoice = 2;
+			currentTexture = boxTextureList[playerBoxChoice];
+			
+			// Get the dimensions of the boxes directly
+			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
+			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
 		}
 	}
 
 	void OnGUI ()
 	{
+		// Box outline that follows the mouse
 		GUI.Box(new Rect((mouseScreenPosition.x-boxWidth/2.0f),(Screen.height-mouseScreenPosition.y-boxHeight/2.0f),
 		                 boxHeight, boxWidth), "");
 
-		GUI.Box(new Rect(10, 10, boxHeight*2, boxWidth*2), "Player");
-
-		GUI.DrawTexture(new Rect(10, 10, 10, 10), currentTexture);
+		// User stats on the boxes
+		GUI.Box (new Rect(Screen.width-250, Screen.height-150, 200, 110), "");
+		GUI.DrawTexture(new Rect(Screen.width-240, Screen.height-140, boxHeight-4, boxWidth-4), currentTexture);
+		GUI.Label(new Rect(Screen.width-140, Screen.height-140, boxHeight-4, boxWidth-4), "Score");
 
 	}
 }
