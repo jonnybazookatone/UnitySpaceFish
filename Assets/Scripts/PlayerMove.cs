@@ -45,7 +45,15 @@ public class PlayerMove : MonoBehaviour {
 	private int numberOfColours;
 	List<GameObject> boxObjectList = new List<GameObject>();
 	List<Texture> boxTextureList = new List<Texture>();
-	
+
+	// Player health properties
+	private int _playerhealth;
+	public int playerHealth 
+	{
+		get{ return _playerhealth; }
+		set{ _playerhealth = value; }
+	}
+
 	// Variables end_____________________
 
 	// Use this for initialization
@@ -76,8 +84,11 @@ public class PlayerMove : MonoBehaviour {
 		playerBoxChoice = Random.Range(0, numberOfColours-1);
 		currentTexture = boxTextureList[playerBoxChoice];
 
-		boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
-		boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+		boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+		boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
+
+		// Default playerHealth properties
+		this.playerHealth = 3;
 	}
 	
 	// Update is called once per frame
@@ -134,8 +145,8 @@ public class PlayerMove : MonoBehaviour {
 			currentTexture = boxTextureList[playerBoxChoice];
 			
 			// Get the dimensions of the boxes directly
-			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
-			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -144,8 +155,8 @@ public class PlayerMove : MonoBehaviour {
 			currentTexture = boxTextureList[playerBoxChoice];
 			
 			// Get the dimensions of the boxes directly
-			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
-			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -154,8 +165,8 @@ public class PlayerMove : MonoBehaviour {
 			currentTexture = boxTextureList[playerBoxChoice];
 			
 			// Get the dimensions of the boxes directly
-			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
-			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+			boxWidth = boxObjectList[playerBoxChoice].transform.lossyScale.x / pixelRatio;
+			boxHeight = boxObjectList[playerBoxChoice].transform.lossyScale.y / pixelRatio;
 		}
 	}
 
@@ -163,12 +174,25 @@ public class PlayerMove : MonoBehaviour {
 	{
 		// Box outline that follows the mouse
 		GUI.Box(new Rect((mouseScreenPosition.x-boxWidth/2.0f),(Screen.height-mouseScreenPosition.y-boxHeight/2.0f),
-		                 boxHeight, boxWidth), "");
+		                 boxWidth, boxHeight), "");
 
 		// User stats on the boxes
 		GUI.Box (new Rect(Screen.width-250, Screen.height-150, 200, 110), "");
-		GUI.DrawTexture(new Rect(Screen.width-240, Screen.height-140, boxHeight-4, boxWidth-4), currentTexture);
-		GUI.Label(new Rect(Screen.width-140, Screen.height-140, boxHeight-4, boxWidth-4), "Score");
+		GUI.DrawTexture(new Rect(Screen.width-240, Screen.height-140, boxWidth-4, boxHeight-4), currentTexture);
+
+		// Score
+		GUI.Label(new Rect(Screen.width-140, Screen.height-140, 50, 50), "Score");
+		GUI.Label(new Rect(Screen.width-140, Screen.height-120, 100, 50), "Fake 100");
+		
+		// Health
+		GUI.Label(new Rect(Screen.width-140, Screen.height-100, 50, 50), "Health");
+		// Draw a box for every unit of health
+		if (playerHealth > 2)
+			GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), currentTexture);
+		if (playerHealth > 1)
+			GUI.DrawTexture(new Rect(Screen.width-140+25, Screen.height-80, 20, 20), currentTexture);
+		if (playerHealth > 0)
+			GUI.DrawTexture(new Rect(Screen.width-140+50, Screen.height-80, 20, 20), currentTexture);
 
 	}
 }
