@@ -439,3 +439,5 @@ MonoBehaviour:
   RedTexture: {fileID: 2800000, guid: 52ae03873dd9f55469f257a1dc657381, type: 3}
   BlueTexture: {fileID: 2800000, guid: 1a1d25bb808a64b4c8f2320ac8e0d539, type: 3}
   GreenTexture: {fileID: 2800000, guid: 27485a68e4754fa4381ebe9d086003e4, type: 3}
+  healthTexture: {fileID: 2800000, guid: c44c5190d576dd64b9db08b89a7014e5, type: 3}
+  noHealthTexture: {fileID: 2800000, guid: 03d3d766ad8719e4199c23eaa27d1893, type: 3}
