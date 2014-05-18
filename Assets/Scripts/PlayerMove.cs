@@ -56,6 +56,14 @@ public class PlayerMove : MonoBehaviour {
 		set{ _playerhealth = value; }
 	}
 
+	// Player score properties
+	private int _playerscore;
+	public int playerScore
+	{
+		get{ return _playerscore; }
+		set{_playerscore = value; }
+	}
+
 	// Variables end_____________________
 
 	// Use this for initialization
@@ -91,6 +99,7 @@ public class PlayerMove : MonoBehaviour {
 
 		// Default playerHealth properties
 		this.playerHealth = 3;
+		this.playerScore = 0;
 	}
 	
 	// Update is called once per frame
@@ -184,7 +193,13 @@ public class PlayerMove : MonoBehaviour {
 
 		// Score
 		GUI.Label(new Rect(Screen.width-140, Screen.height-140, 50, 50), "Score");
-		GUI.Label(new Rect(Screen.width-140, Screen.height-120, 100, 50), "Fake 100");
+		GUI.Label(new Rect(Screen.width-140, Screen.height-120, 100, 50), playerScore.ToString());
+
+		// Open portal if score is higher than a given value
+		if (playerScore >= 5)
+		{
+			GUI.Label(new Rect(Screen.width-120, Screen.height-120, 100, 20), "PORTAL");
+		}
 		
 		// Health
 		GUI.Label(new Rect(Screen.width-140, Screen.height-100, 50, 50), "HP");
@@ -210,20 +225,11 @@ public class PlayerMove : MonoBehaviour {
 				GUI.DrawTexture(new Rect(Screen.width-80, Screen.height-80, 20, 20), noHealthTexture);
 				break;
 
+			default:
+				GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), noHealthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-110, Screen.height-80, 20, 20), noHealthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-80, Screen.height-80, 20, 20), noHealthTexture);
+				break;
 		}
-		//if (playerHealth == 3)
-		//{
-		//	GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), healthTexture);
-		//}
-		//else
-		//{
-		//	GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), healthTexture);
-		//}
-
-		//if (playerHealth > 1)
-		//	GUI.DrawTexture(new Rect(Screen.width-140+25, Screen.height-80, 20, 20), healthTexture);
-		//if (playerHealth > 0)
-		//	GUI.DrawTexture(new Rect(Screen.width-140+50, Screen.height-80, 20, 20), healthTexture);
-
 	}
 }

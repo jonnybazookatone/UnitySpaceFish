@@ -104,6 +104,8 @@ MonoBehaviour:
   playerBoxRed: {fileID: 100000, guid: a39e9825813e8b040a75335e5a43c3ae, type: 2}
   playerBoxGreen: {fileID: 100000, guid: ed7764f188ddfb14a8706a723d0b1717, type: 2}
   playerBoxBlue: {fileID: 100000, guid: c57d1d1c9a7a8854ab6372dd6b44f33b, type: 2}
+  gameDiamond: {fileID: 100000, guid: ebc92633a4237f24b8a4e0950dbfefb3, type: 2}
+  gamePortal: {fileID: 100000, guid: 62815e7245bd5274b951ec9a61843182, type: 2}
 --- !u!4 &459313949
 Transform:
   m_ObjectHideFlags: 0
@@ -368,7 +370,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!23 &1802606629
 Renderer:

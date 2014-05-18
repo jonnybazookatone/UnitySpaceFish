@@ -13,7 +13,8 @@ using System.Collections;
 
 public class BoxDestroy : MonoBehaviour {
 
-	void OnCollisionEnter(Collision collision) {
+	void OnCollisionEnter(Collision collision) 
+	{
 
 		// If two boxes collide
 		if (collision.gameObject.tag == this.gameObject.tag)
