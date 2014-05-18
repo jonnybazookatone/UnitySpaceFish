@@ -4,6 +4,8 @@ using System.Collections;
 /// <summary>
 /// This script destroys boxes if they are of the same type.
 /// 
+/// This script reduces the player health if the player is hit from a box above
+/// 
 /// Author: Jonathan Elliott 
 /// Year:   2014
 /// 
@@ -20,34 +22,29 @@ public class BoxDestroy : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 
-		// If box collides with the player
-		if (collision.gameObject.tag == "Player")
+		// If box collides with the player while the box is moving
+		if ( (collision.gameObject.tag == "Player") && (this.gameObject.rigidbody.velocity.magnitude > 0) )
 		{
 
-			// Downwards in the y-axis
-			Vector3 Downwards = new Vector3(0, -1, 0);
-			RaycastHit hit;
-			//Physics.Raycast(this.transform.position, Downwards, out hit);
-
-			Physics.Raycast(this.transform.position, Downwards, out hit);
-
-
-			hit.point = hit.transform.InverseTransformPoint(hit.point);
-			hit.normal = hit.transform.InverseTransformDirection(hit.normal);
-			//Debug.Log("Hit position" + hit.point);
-			Debug.Log ("Hit vector:" + hit.normal);
-
-
-			Destroy(this.gameObject);
-			PlayerMove PScript = collision.gameObject.GetComponent<PlayerMove>();
-			if (PScript.playerHealth <= 0)
+			// Get the collision point and make sure it is coming from an upward direction
+			if (collision.contacts[0].normal == Vector3.up)
 			{
-				Destroy (collision.gameObject);
-				// Launch game over
-			}
-			else
-			{
-				PScript.playerHealth--;
+				//Debug.Log ("contact normal;" + collision.contacts[0].normal);
+
+				// Remove the cube
+				Destroy(this.gameObject);
+
+				// Update the player's health
+				PlayerMove PScript = collision.gameObject.GetComponent<PlayerMove>();
+				if (PScript.playerHealth <= 0)
+					{
+						Destroy (collision.gameObject);
+						// Launch game over
+					}
+					else
+					{
+						PScript.playerHealth--;
+					}
 			}
 		}
 	}

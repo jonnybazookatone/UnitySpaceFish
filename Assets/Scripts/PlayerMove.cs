@@ -37,6 +37,8 @@ public class PlayerMove : MonoBehaviour {
 	public Texture RedTexture;
 	public Texture BlueTexture;
 	public Texture GreenTexture;
+	public Texture healthTexture;
+	public Texture noHealthTexture;
 
 	// Box variables
 	private float boxWidth;
@@ -185,14 +187,43 @@ public class PlayerMove : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width-140, Screen.height-120, 100, 50), "Fake 100");
 		
 		// Health
-		GUI.Label(new Rect(Screen.width-140, Screen.height-100, 50, 50), "Health");
+		GUI.Label(new Rect(Screen.width-140, Screen.height-100, 50, 50), "HP");
 		// Draw a box for every unit of health
-		if (playerHealth > 2)
-			GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), currentTexture);
-		if (playerHealth > 1)
-			GUI.DrawTexture(new Rect(Screen.width-140+25, Screen.height-80, 20, 20), currentTexture);
-		if (playerHealth > 0)
-			GUI.DrawTexture(new Rect(Screen.width-140+50, Screen.height-80, 20, 20), currentTexture);
+
+		switch (playerHealth)
+		{
+			case 3:
+				GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), healthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-110, Screen.height-80, 20, 20), healthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-80, Screen.height-80, 20, 20), healthTexture);
+				break;
+
+			case 2:
+				GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), healthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-110, Screen.height-80, 20, 20), healthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-80, Screen.height-80, 20, 20), noHealthTexture);
+				break;
+
+			case 1:
+				GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), healthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-110, Screen.height-80, 20, 20), noHealthTexture);
+				GUI.DrawTexture(new Rect(Screen.width-80, Screen.height-80, 20, 20), noHealthTexture);
+				break;
+
+		}
+		//if (playerHealth == 3)
+		//{
+		//	GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), healthTexture);
+		//}
+		//else
+		//{
+		//	GUI.DrawTexture(new Rect(Screen.width-140, Screen.height-80, 20, 20), healthTexture);
+		//}
+
+		//if (playerHealth > 1)
+		//	GUI.DrawTexture(new Rect(Screen.width-140+25, Screen.height-80, 20, 20), healthTexture);
+		//if (playerHealth > 0)
+		//	GUI.DrawTexture(new Rect(Screen.width-140+50, Screen.height-80, 20, 20), healthTexture);
 
 	}
 }

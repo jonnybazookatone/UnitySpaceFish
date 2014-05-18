@@ -4,6 +4,7 @@
 *.png
 *.tif
 *.tiff
+*.xcf
 
 # =============== #
 # Unity generated #
