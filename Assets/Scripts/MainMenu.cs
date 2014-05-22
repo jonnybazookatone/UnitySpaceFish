@@ -17,25 +17,51 @@ public class MainMenu : MonoBehaviour {
 
 	void Start ()
 	{
-		boxWidth = Screen.width/2.0f;
-		boxHeight = Screen.height/2.0f;
+		boxWidth = Screen.width/5.0f;
+		boxHeight = Screen.height/2.0f-50;
 	}
 
 	void OnGUI ()
 	{
 
-		GUI.Box(new Rect(Screen.width/4.0f, Screen.height/4.0f, boxWidth, boxHeight), "");
-		if(GUI.Button (new Rect(Screen.width/2.0f-50, Screen.height/2.0f-150, 120, 30), "Let's move in!"))
+		// Standard play button
+		GUI.Box(new Rect(Screen.width/5.0f, Screen.height/4.0f, boxWidth, boxHeight), "");
+
+		if(GUI.Button (new Rect(Screen.width/5.0f+50, Screen.height/2.0f-150, boxWidth-100, 30), "Let's move in!"))
 		{
 			Debug.Log ("Play game!");
+			Application.LoadLevel("Main");
 		}
-		if(GUI.Button (new Rect(Screen.width/2.0f-50, Screen.height/2.0f-50, 120, 30), "How shit am I?"))
+
+		// Standard quit button
+		if(GUI.Button (new Rect(Screen.width/5.0f+50, Screen.height/2.0f+50, boxWidth-100, 30), "Get me out of here!"))
 		{
-			Debug.Log ("See high score!");
-		}
-		if(GUI.Button (new Rect(Screen.width/2.0f-50, Screen.height/2.0f+50, 120, 30), "Get me out of here!"))
-		{
+			#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+			#elif UNITY_WEBPLAYER
+			Application.OpenURL(webplayerQuitURL);
+			#else
+			Application.Quit();
+			#endif
 			Debug.Log ("Quit game!");
 		}
+
+		// How to
+		GUI.Box(new Rect(Screen.width/5.0f+100+boxWidth, Screen.height/4.0f, boxWidth, boxHeight), "");
+		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f, 200, 100), "WTF IS GOING ON!?");
+		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+50, 200, 500), "AIM OF THE GAME:" + System.Environment.NewLine +
+		          "1. COLLECT FALLING FISH/DIAMONDS TO GAIN PORTAL POINTS" + System.Environment.NewLine +
+		          "2. WHEN THE PORTAL OPENS YOU HAVE TO ENTER THE PORTAL BY UTILISING BLOCKS" +System.Environment.NewLine +
+		          "3. KEYS 1, 2, 3 CHANGE THE BLOCKS YOU CAN CREATE WITH MOUSE-1" +System.Environment.NewLine +
+		          "4. SPACEBAR IS JUMP" +System.Environment.NewLine +
+		          "5. BLOCKS CAN KILL YOU IF THEY FALL ON YOUR HEAD" + System.Environment.NewLine);
+		
+		// Scoreboard
+		if(GUI.Button (new Rect(Screen.width/5.0f+50, Screen.height/2.0f-50, boxWidth-100, 30), "How shit am I?"))
+		{
+			// Load score scene?
+			Debug.Log ("See high score!");
+		}
+
 	}
 }
