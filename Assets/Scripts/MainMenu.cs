@@ -47,14 +47,35 @@ public class MainMenu : MonoBehaviour {
 		}
 
 		// How to
-		GUI.Box(new Rect(Screen.width/5.0f+100+boxWidth, Screen.height/4.0f, boxWidth, boxHeight), "");
-		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f, 200, 100), "WTF IS GOING ON!?");
-		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+50, 200, 500), "AIM OF THE GAME:" + System.Environment.NewLine +
-		          "1. COLLECT FALLING FISH/DIAMONDS TO GAIN PORTAL POINTS" + System.Environment.NewLine +
-		          "2. WHEN THE PORTAL OPENS YOU HAVE TO ENTER THE PORTAL BY UTILISING BLOCKS" +System.Environment.NewLine +
-		          "3. KEYS 1, 2, 3 CHANGE THE BLOCKS YOU CAN CREATE WITH MOUSE-1" +System.Environment.NewLine +
-		          "4. SPACEBAR IS JUMP" +System.Environment.NewLine +
-		          "5. BLOCKS CAN KILL YOU IF THEY FALL ON YOUR HEAD" + System.Environment.NewLine);
+		GUI.Box(new Rect(Screen.width/5.0f+100+boxWidth, Screen.height/4.0f, boxWidth+110, boxHeight), "");
+		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f, 300, 100), "AIM OF THE GAME");
+
+		string text1 = "1.  COLLECT FALLING FISH/DIAMONDS TO GAIN PORTAL POINTS" + System.Environment.NewLine + System.Environment.NewLine +
+					   "2.  WHEN THE PORTAL OPENS YOU HAVE TO ENTER THE PORTAL BY UTILISING BLOCKS";
+
+		string text2 = "KEY 1:    CHANGE TO BLOCK COLOUR 1 (BLUE)" + System.Environment.NewLine +
+			           "KEY 2:    CHANGE TO BLOCK COLOUR 2 (RED)" + System.Environment.NewLine +
+				       "KEY 3:    CHANGE TO BLOCK COLOUR 3 (GREEN)" + System.Environment.NewLine +
+		               "SPACEBAR: JUMP" +System.Environment.NewLine +
+				       "MOUSE1:   MAKE BLOCK";
+
+		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f, 300, 100), "AIM OF THE GAME");
+		GUI.TextArea(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+30, 250, 100), text1);
+
+	
+		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+135, 300, 100), "CONTROLS");
+		GUI.TextArea(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+160, 320, 100), text2);
+
+		GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+270, 300, 100), "WARNINGS");
+
+		//GUI.Box(new Rect(Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+50, 200, 500), "");
+
+		//GUI.Label(new Rect (Screen.width/5.0f+boxWidth*1.5f, Screen.height/4.0f+50, 200, 500), "AIM OF THE GAME:" + System.Environment.NewLine +
+		//          "1. COLLECT FALLING FISH/DIAMONDS TO GAIN PORTAL POINTS" + System.Environment.NewLine +
+		//          "2. WHEN THE PORTAL OPENS YOU HAVE TO ENTER THE PORTAL BY UTILISING BLOCKS" +System.Environment.NewLine +
+		//          "3. KEYS 1, 2, 3 CHANGE THE BLOCKS YOU CAN CREATE WITH MOUSE-1" +System.Environment.NewLine +
+		//          "4. SPACEBAR IS JUMP" +System.Environment.NewLine +
+		//          "5. BLOCKS CAN KILL YOU IF THEY FALL ON YOUR HEAD" + System.Environment.NewLine);
 		
 		// Scoreboard
 		if(GUI.Button (new Rect(Screen.width/5.0f+50, Screen.height/2.0f-50, boxWidth-100, 30), "How shit am I?"))
