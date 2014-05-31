@@ -5,6 +5,8 @@
 *.tif
 *.tiff
 *.xcf
+*.jpg
+*.jpeg
 
 # =============== #
 # Unity generated #
