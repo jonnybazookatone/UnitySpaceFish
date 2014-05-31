@@ -13,6 +13,11 @@ using System.Collections;
 
 public class BoxDestroy : MonoBehaviour {
 
+	// Variables start___________________
+	public GameObject scoreManager;
+
+	// Variables end_____________________
+
 	void OnCollisionEnter(Collision collision) 
 	{
 
@@ -40,7 +45,11 @@ public class BoxDestroy : MonoBehaviour {
 				if (PScript.playerHealth <= 0)
 					{
 						Destroy (collision.gameObject);
+
 						// Launch game over
+						scoreManager = GameObject.Find ("ScoreManager");
+						ScoreManager SManager = scoreManager.GetComponent<ScoreManager>();
+						SManager.endOfGame = true;
 					}
 					else
 					{
